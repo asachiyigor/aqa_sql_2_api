@@ -16,7 +16,7 @@ public class TransferTest {
     }
 
     @Test
-    void shouldTransferToOwnCardAndRevers() {
+    void shouldTransferToOwnCardAndBack() {
         String token = shouldLoginAndGetToken();
         Data.CardTransferInfo cardTransferInfo = getCardTransferInfo("5559 0000 0000 0001", "5559 0000 0000 0002", "5000");
         String jsonCardData = new Gson().toJson(cardTransferInfo);
@@ -33,7 +33,7 @@ public class TransferTest {
     }
 
     @Test
-    void shouldTransferTOthersCardAndRevers() {
+    void shouldTransferToCardAndBack() {
         String token = shouldLoginAndGetToken();
         Data.CardTransferInfo cardTransferInfo = getCardTransferInfo("5559 0000 0000 0001", "5559 0000 0000 7777", "5000");
         String jsonCardData = new Gson().toJson(cardTransferInfo);
@@ -48,7 +48,7 @@ public class TransferTest {
     }
 
     @Test
-    void shouldNotTransferIfAmountExceeded() {
+    void shouldNotTransferIfAmountMoreThenBalance() {
         String token = shouldLoginAndGetToken();
         Data.CardTransferInfo cardTransferInfo = getCardTransferInfo("5559 0000 0000 0001", "5559 0000 0000 7777", "50000");
         String jsonCardData = new Gson().toJson(cardTransferInfo);
