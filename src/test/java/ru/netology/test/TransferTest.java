@@ -1,6 +1,7 @@
 package ru.netology.test;
 
 import com.google.gson.Gson;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.Data;
 import ru.netology.data.DbInteraction;
@@ -13,6 +14,12 @@ public class TransferTest {
     public String shouldLoginAndGetToken() {
         Data.login();
         return Data.verify(DbInteraction.getVerificationCode(Data.getAuthInfo()));
+    }
+
+    @AfterAll
+    private static void clearDb() {
+        DbInteraction db = new DbInteraction();
+        db.deleteDataFromDb();
     }
 
     @Test

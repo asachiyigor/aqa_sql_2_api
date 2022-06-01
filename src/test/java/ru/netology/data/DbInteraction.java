@@ -23,4 +23,15 @@ public class DbInteraction {
         val userId = runner.query(conn, "SELECT id FROM users WHERE login = '" + authInfo.getLogin() + "'", new ScalarHandler<>());
         return runner.query(conn, "SELECT code FROM auth_codes WHERE user_id = '" + userId + "' ORDER BY created DESC LIMIT 1", new ScalarHandler<>());
     }
+
+    @SneakyThrows
+    public void deleteDataFromDb() {
+        var runner = new QueryRunner();
+        try (var conn = getConnection()) {
+            runner.update(conn, "DELETE FROM card_transactions");
+            runner.update(conn, "DELETE FROM auth_codes");
+            runner.update(conn, "DELETE FROM cards");
+            runner.update(conn, "DELETE FROM users");
+        }
+    }
 }
